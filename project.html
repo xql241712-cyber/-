@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Project by Qili Xu." />
+    <title>Project - Qili Xu</title>
+    <link rel="stylesheet" href="styles.css?v=20260917-23" />
+  </head>
+  <body class="project-detail-page" data-title-en="Qili Xu" data-title-zh="徐啟笠">
+    <header class="page-header">
+      <nav class="page-nav" aria-label="Primary navigation">
+        <a class="page-nav__link" href="index.html" data-en="Home" data-zh="首页">Home</a>
+        <a class="page-nav__link is-current" href="projects.html" data-en="Projects" data-zh="项目">Projects</a>
+        <a class="page-nav__link" href="fragments.html" data-en="Fragments" data-zh="片段">Fragments</a>
+        <a class="page-nav__link" href="about-contact.html" data-en="About &amp; Contact" data-zh="关于与联系">About &amp; Contact</a>
+      </nav>
+      <div class="page-language-switch" aria-label="Language selector">
+        <button type="button" class="page-language-switch__button is-active" data-language="en" aria-pressed="true">English</button>
+        <span aria-hidden="true">/</span>
+        <button type="button" class="page-language-switch__button" data-language="zh" aria-pressed="false">中文</button>
+      </div>
+    </header>
+
+    <main class="project-detail" id="project-detail">
+      <a class="project-detail__back" href="projects.html" data-en="← All projects" data-zh="← 所有项目">← All projects</a>
+      <div class="project-detail__intro">
+        <p class="project-detail__number" id="project-number"></p>
+        <h1 class="project-detail__title" id="project-title"></h1>
+        <p class="project-detail__meta" id="project-meta"></p>
+        <a class="project-detail__watch" id="project-watch" target="_blank" rel="noreferrer"></a>
+      </div>
+      <div class="project-detail__video" id="project-video"></div>
+      <div class="project-detail__gallery" id="project-gallery"></div>
+      <article class="project-detail__text" id="project-text"></article>
+      <div class="project-detail__post-gallery" id="project-post-gallery"></div>
+      <nav class="project-detail__pagination" aria-label="Project navigation">
+        <a id="project-previous"></a>
+        <a id="project-next"></a>
+      </nav>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
