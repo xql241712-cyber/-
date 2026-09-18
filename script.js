@@ -1,5 +1,6 @@
 const languageButtons = document.querySelectorAll('[data-language]');
 const translatable = document.querySelectorAll('[data-en][data-zh]');
+const languageStorageKey = 'qili-xu-language';
 
 const projectCatalogue = {
   'between-tongues': {
@@ -33,8 +34,10 @@ const projectCatalogue = {
     detailLayout: 'calling',
     galleryLayout: 'calling-rhythm',
     galleryGroups: [
-      ['assets/projects/gallery/the-calling/07.jpg'],
-      ['assets/projects/gallery/the-calling/02.jpg'],
+      [
+        'assets/projects/gallery/the-calling/07.jpg',
+        'assets/projects/gallery/the-calling/02.jpg'
+      ],
       ['assets/projects/gallery/the-calling/05.jpg'],
       ['assets/projects/gallery/the-calling/06.jpg'],
       ['assets/projects/gallery/the-calling/04.jpg'],
@@ -128,6 +131,33 @@ const projectCatalogue = {
     ]
   }
 };
+
+function syncHomeHeroShift() {
+  const hero = document.querySelector('.hero');
+  const name = document.querySelector('.hero__title');
+  if (!hero || !name) return;
+
+  hero.style.setProperty('--hero-name-shift', `${name.getBoundingClientRect().width * (2 / 3)}px`);
+}
+
+function scheduleHomeHeroShift() {
+  requestAnimationFrame(() => requestAnimationFrame(syncHomeHeroShift));
+}
+
+function syncCallingTitleAlignment() {
+  const detail = document.querySelector('.project-detail--calling');
+  const title = document.querySelector('.project-detail__title');
+  const firstImage = document.querySelector('.project-detail__composition--calling-rhythm-1 img:first-child');
+  if (!detail || !title || !firstImage) return;
+
+  firstImage.style.setProperty('--calling-title-align-shift', '0px');
+  const offset = title.getBoundingClientRect().left - firstImage.getBoundingClientRect().left;
+  firstImage.style.setProperty('--calling-title-align-shift', `${offset}px`);
+}
+
+function scheduleCallingTitleAlignment() {
+  requestAnimationFrame(() => requestAnimationFrame(syncCallingTitleAlignment));
+}
 
 function renderProjectDetail(language = document.documentElement.lang === 'zh-CN' ? 'zh' : 'en') {
   const root = document.getElementById('project-detail');
@@ -229,35 +259,38 @@ function renderProjectDetail(language = document.documentElement.lang === 'zh-CN
 
   const previousLink = document.getElementById('project-previous');
   previousLink.href = `project.html?work=${keys[(current - 1 + keys.length) % keys.length]}`;
-  previousLink.textContent = `← ${previous.title}`;
+  previousLink.textContent = `← ${language === 'zh' ? previous.titleZh : previous.title}`;
   const nextLink = document.getElementById('project-next');
   nextLink.href = `project.html?work=${keys[(current + 1) % keys.length]}`;
-  nextLink.textContent = `${next.title} →`;
+  nextLink.textContent = `${language === 'zh' ? next.titleZh : next.title} →`;
 }
 
-function setLanguage(language) {
-  document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
-  document.title = language === 'zh' ? document.body.dataset.titleZh : document.body.dataset.titleEn;
+function setLanguage(language, { remember = true } = {}) {
+  const selectedLanguage = language === 'zh' ? 'zh' : 'en';
+  if (remember) localStorage.setItem(languageStorageKey, selectedLanguage);
+
+  document.documentElement.lang = selectedLanguage === 'zh' ? 'zh-CN' : 'en';
+  document.title = selectedLanguage === 'zh' ? document.body.dataset.titleZh : document.body.dataset.titleEn;
 
   translatable.forEach((element) => {
-    element.innerHTML = element.dataset[language];
+    element.innerHTML = element.dataset[selectedLanguage];
   });
 
   languageButtons.forEach((button) => {
-    const active = button.dataset.language === language;
+    const active = button.dataset.language === selectedLanguage;
     button.classList.toggle('is-active', active);
     button.setAttribute('aria-pressed', String(active));
   });
 
-  renderProjectDetail(language);
-  renderFragments(language);
+  renderProjectDetail(selectedLanguage);
+  renderFragments(selectedLanguage);
+  scheduleHomeHeroShift();
+  scheduleCallingTitleAlignment();
 }
 
 languageButtons.forEach((button) => {
   button.addEventListener('click', () => setLanguage(button.dataset.language));
 });
-
-renderProjectDetail();
 
 const fragmentImages = [
   { src: 'assets/fragments/2026-08-01.jpg', month: '2026-08', rhythm: 1 },
@@ -443,4 +476,153 @@ function renderFragments(language = document.documentElement.lang === 'zh-CN' ? 
   }
 }
 
-renderFragments();
+const carouselFragmentImages = [
+  'assets/fragments/2026-08-03.jpg',
+  'assets/fragments/2025-06-01.jpg',
+  'assets/fragments/2026-05-04.jpg',
+  'assets/fragments/2025-10-01.jpg',
+  'assets/fragments/2026-08-02.jpg',
+  'assets/fragments/2025-06-03.jpg',
+  'assets/fragments/2026-05-01.jpg'
+];
+
+function initializeFragmentsCarousel() {
+  const page = document.getElementById('fragments-carousel-page');
+  const track = document.getElementById('fragments-carousel-track');
+  if (!page || !track || track.dataset.initialized) return;
+  track.dataset.initialized = 'true';
+
+  for (let sequence = 0; sequence < 3; sequence += 1) {
+    carouselFragmentImages.forEach((src, index) => {
+      const item = document.createElement('figure');
+      item.className = 'fragments-carousel__item';
+      item.dataset.fragmentIndex = String(index);
+      item.dataset.sequenceIndex = String(sequence * carouselFragmentImages.length + index);
+      const image = fragmentImage(src, `Fragment ${index + 1}`);
+      image.loading = 'eager';
+      item.append(image);
+      track.append(item);
+    });
+  }
+
+  const viewport = track.parentElement;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const sequenceLength = carouselFragmentImages.length;
+  const centerOffset = Math.floor(sequenceLength / 2);
+  const resetAt = sequenceLength * 2 + centerOffset;
+  let visualIndex = sequenceLength + centerOffset;
+  let movementInProgress = false;
+  let movementTimer;
+  let autoAdvanceTimer;
+
+  const activeItemIsHovered = () => Boolean(track.querySelector('.fragments-carousel__item.is-current:hover'));
+
+  const scheduleAutoAdvance = () => {
+    clearTimeout(autoAdvanceTimer);
+    if (prefersReducedMotion || movementInProgress || activeItemIsHovered()) return;
+    autoAdvanceTimer = window.setTimeout(() => moveToIndex(visualIndex + 1), 1500);
+  };
+
+  const setVisualIndex = (index, instant = false) => {
+    const items = [...track.children];
+    const activeItem = items[index];
+    if (!activeItem) return;
+    visualIndex = index;
+    track.dataset.activeIndex = activeItem.dataset.fragmentIndex;
+    items.forEach((item) => item.classList.toggle('is-current', item === activeItem));
+    track.classList.toggle('is-resetting', instant);
+    const offset = viewport.clientWidth / 2 - (activeItem.offsetLeft + activeItem.offsetWidth / 2);
+    track.style.transform = `translate3d(${offset}px, 0, 0)`;
+    if (instant) {
+      void track.offsetWidth;
+      requestAnimationFrame(() => requestAnimationFrame(() => track.classList.remove('is-resetting')));
+    }
+  };
+
+  const finishMovement = () => {
+    if (!movementInProgress) return;
+    movementInProgress = false;
+    clearTimeout(movementTimer);
+    if (visualIndex >= resetAt) {
+      setVisualIndex(visualIndex - sequenceLength, true);
+    }
+    scheduleAutoAdvance();
+  };
+
+  const moveToIndex = (index) => {
+    if (movementInProgress || index === visualIndex) return;
+    movementInProgress = true;
+    setVisualIndex(index);
+
+    const onTrackTransitionEnd = (event) => {
+      if (event.target !== track || event.propertyName !== 'transform') return;
+      track.removeEventListener('transitionend', onTrackTransitionEnd);
+      finishMovement();
+    };
+    track.addEventListener('transitionend', onTrackTransitionEnd);
+    movementTimer = setTimeout(finishMovement, 900);
+  };
+
+  const centerHoveredItem = (item) => {
+    if (movementInProgress || item.classList.contains('is-current')) return;
+    const sourceIndex = Number(item.dataset.fragmentIndex);
+    const candidateIndexes = [...track.children]
+      .map((entry, index) => ({ entry, index }))
+      .filter(({ entry }) => Number(entry.dataset.fragmentIndex) === sourceIndex)
+      .map(({ index }) => index);
+    const closestIndex = candidateIndexes.reduce((closest, index) => (
+      Math.abs(index - visualIndex) < Math.abs(closest - visualIndex) ? index : closest
+    ));
+    moveToIndex(closestIndex);
+  };
+
+  track.addEventListener('pointerover', (event) => {
+    const item = event.target.closest('.fragments-carousel__item');
+    if (!item || !track.contains(item)) return;
+    const relatedItem = event.relatedTarget?.closest?.('.fragments-carousel__item');
+    if (relatedItem === item) return;
+    clearTimeout(autoAdvanceTimer);
+    centerHoveredItem(item);
+  });
+
+  track.addEventListener('pointerout', (event) => {
+    const item = event.target.closest('.fragments-carousel__item');
+    if (!item || !track.contains(item)) return;
+    const relatedItem = event.relatedTarget?.closest?.('.fragments-carousel__item');
+    if (relatedItem === item) return;
+    requestAnimationFrame(scheduleAutoAdvance);
+  });
+
+  track.addEventListener('click', (event) => {
+    const item = event.target.closest('.fragments-carousel__item');
+    if (!item || !item.classList.contains('is-current')) return;
+    const fragment = fragmentImages.find(({ src }) => src === carouselFragmentImages[Number(item.dataset.fragmentIndex)]);
+    if (!fragment) return;
+    window.location.href = `fragments-by-date.html#${fragmentId(fragment)}`;
+  });
+
+  const imagesLoaded = [...track.querySelectorAll('img')];
+  imagesLoaded.forEach((image) => image.addEventListener('load', () => {
+    if (!movementInProgress) setVisualIndex(visualIndex, true);
+  }, { once: true }));
+  requestAnimationFrame(() => {
+    setVisualIndex(visualIndex, true);
+    scheduleAutoAdvance();
+  });
+  window.addEventListener('resize', () => {
+    setVisualIndex(visualIndex, true);
+    scheduleAutoAdvance();
+  });
+}
+
+setLanguage(localStorage.getItem(languageStorageKey) === 'zh' ? 'zh' : 'en', { remember: false });
+initializeFragmentsCarousel();
+
+window.addEventListener('resize', () => {
+  syncHomeHeroShift();
+  syncCallingTitleAlignment();
+});
+document.fonts?.ready.then(() => {
+  syncHomeHeroShift();
+  syncCallingTitleAlignment();
+});
