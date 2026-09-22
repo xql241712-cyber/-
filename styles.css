@@ -962,6 +962,21 @@ body {
 
 .fragments-archive__item { scroll-margin-top: 6rem; }
 
+.fragments-archive__item--new-row {
+  grid-column: 1 / -1;
+  justify-self: start;
+  width: 32%;
+}
+
+.fragments-archive__pair {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2.4vw, 2.4rem);
+  justify-self: start;
+  width: 65%;
+}
+
 .fragments-archive__button {
   display: block;
   width: 100%;
@@ -1051,6 +1066,8 @@ body.has-fragment-lightbox { overflow: hidden; }
   .fragments-archive__group { display: block; margin-bottom: 5rem; }
   .fragments-archive__date { margin-bottom: 1.4rem; }
   .fragments-archive__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fragments-archive__item--new-row { width: 48%; }
+  .fragments-archive__pair { width: 100%; }
   .fragment-lightbox__image { max-width: calc(100vw - 3.5rem); max-height: calc(100svh - 6rem); }
   .fragment-lightbox__control { padding: 0.65rem; }
 }
@@ -1329,6 +1346,19 @@ html[lang="zh-CN"] .project-detail__pagination a {
 
 /* Fragments carousel: one coloured image travels through a muted sequence. */
 .fragments-carousel-page { overflow: hidden; }
+
+.fragments-carousel__date-link {
+  position: absolute;
+  top: calc(clamp(8rem, 18vh, 13rem) + clamp(1.15rem, 1.7vw, 1.75rem));
+  right: clamp(1.5rem, 4vw, 4rem);
+  color: var(--soft-ink);
+  font: 500 1.005rem/1.2 var(--sans);
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+
+.fragments-carousel__date-link:hover,
+.fragments-carousel__date-link:focus-visible { color: var(--ink); }
 
 .fragments-carousel {
   min-height: calc(100svh - clamp(8rem, 18vh, 13rem));

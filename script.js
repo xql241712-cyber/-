@@ -293,6 +293,24 @@ languageButtons.forEach((button) => {
 });
 
 const fragmentImages = [
+  { src: 'assets/fragments/2026-09-01.jpg', month: '2026-09', rhythm: 13 },
+  { src: 'assets/fragments/2026-09-02.jpg', month: '2026-09', rhythm: 14 },
+  { src: 'assets/fragments/2026-09-03.jpg', month: '2026-09', rhythm: 15 },
+  { src: 'assets/fragments/2026-09-04.jpg', month: '2026-09', rhythm: 16 },
+  { src: 'assets/fragments/2026-09-05.jpg', month: '2026-09', rhythm: 17 },
+  { src: 'assets/fragments/2026-09-06.jpg', month: '2026-09', rhythm: 18 },
+  { src: 'assets/fragments/2026-09-16.jpg', month: '2026-09', rhythm: 28 },
+  { src: 'assets/fragments/2026-09-08.jpg', month: '2026-09', rhythm: 20 },
+  { src: 'assets/fragments/2026-09-09.jpg', month: '2026-09', rhythm: 21 },
+  { src: 'assets/fragments/2026-09-10.jpg', month: '2026-09', rhythm: 22 },
+  { src: 'assets/fragments/2026-09-07.jpg', month: '2026-09', rhythm: 19 },
+  { src: 'assets/fragments/2026-09-13.jpg', month: '2026-09', rhythm: 25 },
+  { src: 'assets/fragments/2026-09-11.jpg', month: '2026-09', rhythm: 23 },
+  { src: 'assets/fragments/2026-09-12.jpg', month: '2026-09', rhythm: 24 },
+  { src: 'assets/fragments/2026-09-14.jpg', month: '2026-09', rhythm: 26 },
+  { src: 'assets/fragments/2026-09-15.jpg', month: '2026-09', rhythm: 27 },
+  { src: 'assets/fragments/2026-09-17.jpg', month: '2026-09', rhythm: 29, archiveLayout: 'new-row' },
+  { src: 'assets/fragments/2026-09-18.jpg', month: '2026-09', rhythm: 30, archiveLayout: 'new-row' },
   { src: 'assets/fragments/2026-08-01.jpg', month: '2026-08', rhythm: 1 },
   { src: 'assets/fragments/2025-10-01.jpg', month: '2025-10', rhythm: 2 },
   { src: 'assets/fragments/2025-06-02.jpg', month: '2025-06', rhythm: 4 },
@@ -303,10 +321,13 @@ const fragmentImages = [
   { src: 'assets/fragments/2026-05-04.jpg', month: '2026-05', rhythm: 9 },
   { src: 'assets/fragments/2025-06-01.jpg', month: '2025-06', rhythm: 10 },
   { src: 'assets/fragments/2026-08-04.jpg', month: '2026-08', rhythm: 11 },
+  { src: 'assets/fragments/2026-09-19.jpg', month: '2026-08', rhythm: 31, archiveGroup: 'august-france-pair' },
+  { src: 'assets/fragments/2026-09-20.jpg', month: '2026-08', rhythm: 32, archiveGroup: 'august-france-pair' },
   { src: 'assets/fragments/2026-05-02.jpg', month: '2026-05', rhythm: 12 }
 ];
 
 const fragmentMonths = [
+  { key: '2026-09', en: 'September 2026', zh: '2026 年 9 月' },
   { key: '2026-08', en: 'August 2026', zh: '2026 年 8 月' },
   { key: '2026-05', en: 'May 2026', zh: '2026 年 5 月' },
   { key: '2025-10', en: 'October 2025', zh: '2025 年 10 月' },
@@ -449,9 +470,21 @@ function renderFragments(language = document.documentElement.lang === 'zh-CN' ? 
       heading.textContent = month[language];
       const grid = document.createElement('div');
       grid.className = 'fragments-archive__grid';
+      const archiveGroups = new Map();
       fragmentImages.filter((item) => item.month === month.key).forEach((item, index) => {
+        let container = grid;
+        if (item.archiveGroup) {
+          container = archiveGroups.get(item.archiveGroup);
+          if (!container) {
+            container = document.createElement('div');
+            container.className = 'fragments-archive__pair';
+            container.dataset.archiveGroup = item.archiveGroup;
+            archiveGroups.set(item.archiveGroup, container);
+            grid.append(container);
+          }
+        }
         const figure = document.createElement('figure');
-        figure.className = 'fragments-archive__item';
+        figure.className = `fragments-archive__item${item.archiveLayout ? ` fragments-archive__item--${item.archiveLayout}` : ''}`;
         figure.id = fragmentId(item);
         const button = document.createElement('button');
         button.className = 'fragments-archive__button';
@@ -463,7 +496,7 @@ function renderFragments(language = document.documentElement.lang === 'zh-CN' ? 
         });
         button.append(fragmentImage(item.src, `${month[language]}, ${index + 1}`));
         figure.append(button);
-        grid.append(figure);
+        container.append(figure);
       });
       section.append(heading, grid);
       archive.append(section);
@@ -483,7 +516,27 @@ const carouselFragmentImages = [
   'assets/fragments/2025-10-01.jpg',
   'assets/fragments/2026-08-02.jpg',
   'assets/fragments/2025-06-03.jpg',
-  'assets/fragments/2026-05-01.jpg'
+  'assets/fragments/2026-05-01.jpg',
+  'assets/fragments/2026-09-01.jpg',
+  'assets/fragments/2026-09-02.jpg',
+  'assets/fragments/2026-09-03.jpg',
+  'assets/fragments/2026-09-04.jpg',
+  'assets/fragments/2026-09-05.jpg',
+  'assets/fragments/2026-09-06.jpg',
+  'assets/fragments/2026-09-07.jpg',
+  'assets/fragments/2026-09-08.jpg',
+  'assets/fragments/2026-09-09.jpg',
+  'assets/fragments/2026-09-10.jpg',
+  'assets/fragments/2026-09-11.jpg',
+  'assets/fragments/2026-09-12.jpg',
+  'assets/fragments/2026-09-13.jpg',
+  'assets/fragments/2026-09-14.jpg',
+  'assets/fragments/2026-09-15.jpg',
+  'assets/fragments/2026-09-16.jpg',
+  'assets/fragments/2026-09-17.jpg',
+  'assets/fragments/2026-09-18.jpg',
+  'assets/fragments/2026-09-19.jpg',
+  'assets/fragments/2026-09-20.jpg'
 ];
 
 function initializeFragmentsCarousel() {
@@ -508,7 +561,8 @@ function initializeFragmentsCarousel() {
   const viewport = track.parentElement;
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const sequenceLength = carouselFragmentImages.length;
-  const centerOffset = Math.floor(sequenceLength / 2);
+  // Keep the original carousel's landing image and sequence position; new work follows it.
+  const centerOffset = Math.min(3, sequenceLength - 1);
   const resetAt = sequenceLength * 2 + centerOffset;
   let visualIndex = sequenceLength + centerOffset;
   let movementInProgress = false;
