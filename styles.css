@@ -1074,6 +1074,72 @@ body.has-fragment-lightbox { overflow: hidden; }
 
 .about-contact-page { min-height: 100svh; background: var(--paper); }
 
+.becoming-page {
+  min-height: 100svh;
+  background: #fff;
+}
+
+.becoming {
+  padding: 0;
+}
+
+.becoming-project { margin: 0; }
+
+.becoming-project__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: clamp(3rem, 7vw, 8rem);
+}
+
+.becoming-project__keywords,
+.becoming-project__title,
+.becoming-project__number {
+  margin-left: clamp(1.5rem, 19.5vw, 28rem);
+  margin-right: clamp(1.5rem, 4.65vw, 6rem);
+}
+
+.becoming-project__number {
+  margin-top: clamp(4rem, 7vw, 8rem);
+  margin-bottom: 1.2rem;
+  color: var(--soft-ink);
+  font-size: 0.7rem;
+  letter-spacing: 0.07em;
+}
+
+.becoming-project__keywords {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: clamp(1.1rem, 3vw, 4.4rem);
+  margin-top: clamp(3rem, 5.4vw, 6rem);
+  color: rgba(25, 25, 25, 0.42);
+  font: 500 clamp(1.52rem, 1.8vw, 1.9rem)/1.35 var(--sans);
+  letter-spacing: 0.035em;
+  white-space: nowrap;
+}
+
+.becoming-project__title {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(1.05rem, 2.7vw, 3rem);
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 0.95;
+}
+
+html[lang="zh-CN"] .becoming-project__title {
+  font-size: clamp(0.85rem, calc(2.4vw - 0.083333rem), 2.583333rem);
+}
+
+@media (max-width: 620px) {
+  .becoming-project__keywords {
+    gap: 0.7rem;
+    font-size: 0.67rem;
+  }
+}
+
 .about-contact { padding: 0 clamp(1.5rem, 8vw, 9rem) clamp(6rem, 12vw, 12rem); }
 
 .about-contact__title {
