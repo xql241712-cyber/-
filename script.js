@@ -312,6 +312,8 @@ const fragmentImages = [
   { src: 'assets/fragments/2026-09-17.jpg', month: '2026-09', rhythm: 29, archiveLayout: 'new-row' },
   { src: 'assets/fragments/2026-09-18.jpg', month: '2026-09', rhythm: 30, archiveLayout: 'new-row' },
   { src: 'assets/fragments/2026-08-01.jpg', month: '2026-08', rhythm: 1 },
+  { src: 'assets/fragments/2026-06-01.jpg', month: '2026-06', rhythm: 3, archiveLayout: 'june-pair' },
+  { src: 'assets/fragments/2026-06-02.jpg', month: '2026-06', rhythm: 33, archiveLayout: 'june-pair' },
   { src: 'assets/fragments/2025-10-01.jpg', month: '2025-10', rhythm: 2 },
   { src: 'assets/fragments/2025-06-02.jpg', month: '2025-06', rhythm: 4 },
   { src: 'assets/fragments/2026-08-03.jpg', month: '2026-08', rhythm: 5 },
@@ -329,6 +331,7 @@ const fragmentImages = [
 const fragmentMonths = [
   { key: '2026-09', en: 'September 2026', zh: '2026 年 9 月' },
   { key: '2026-08', en: 'August 2026', zh: '2026 年 8 月' },
+  { key: '2026-06', en: 'June 2026', zh: '2026 年 6 月' },
   { key: '2026-05', en: 'May 2026', zh: '2026 年 5 月' },
   { key: '2025-10', en: 'October 2025', zh: '2025 年 10 月' },
   { key: '2025-06', en: 'June 2025', zh: '2025 年 6 月' }
@@ -510,33 +513,35 @@ function renderFragments(language = document.documentElement.lang === 'zh-CN' ? 
 }
 
 const carouselFragmentImages = [
-  'assets/fragments/2026-08-03.jpg',
   'assets/fragments/2025-06-01.jpg',
+  'assets/fragments/2026-08-03.jpg',
   'assets/fragments/2026-05-04.jpg',
+  'assets/fragments/2026-06-01.jpg',
   'assets/fragments/2025-10-01.jpg',
+  'assets/fragments/2026-06-02.jpg',
   'assets/fragments/2026-08-02.jpg',
-  'assets/fragments/2025-06-03.jpg',
-  'assets/fragments/2026-05-01.jpg',
-  'assets/fragments/2026-09-01.jpg',
-  'assets/fragments/2026-09-02.jpg',
   'assets/fragments/2026-09-03.jpg',
+  'assets/fragments/2025-06-03.jpg',
   'assets/fragments/2026-09-04.jpg',
+  'assets/fragments/2026-05-01.jpg',
+  'assets/fragments/2026-09-09.jpg',
+  'assets/fragments/2026-09-01.jpg',
+  'assets/fragments/2026-09-13.jpg',
+  'assets/fragments/2026-09-02.jpg',
+  'assets/fragments/2026-09-17.jpg',
   'assets/fragments/2026-09-05.jpg',
+  'assets/fragments/2026-09-19.jpg',
   'assets/fragments/2026-09-06.jpg',
+  'assets/fragments/2026-09-20.jpg',
   'assets/fragments/2026-09-07.jpg',
   'assets/fragments/2026-09-08.jpg',
-  'assets/fragments/2026-09-09.jpg',
   'assets/fragments/2026-09-10.jpg',
   'assets/fragments/2026-09-11.jpg',
   'assets/fragments/2026-09-12.jpg',
-  'assets/fragments/2026-09-13.jpg',
   'assets/fragments/2026-09-14.jpg',
   'assets/fragments/2026-09-15.jpg',
   'assets/fragments/2026-09-16.jpg',
-  'assets/fragments/2026-09-17.jpg',
   'assets/fragments/2026-09-18.jpg',
-  'assets/fragments/2026-09-19.jpg',
-  'assets/fragments/2026-09-20.jpg'
 ];
 
 function initializeFragmentsCarousel() {
@@ -553,6 +558,9 @@ function initializeFragmentsCarousel() {
       item.dataset.sequenceIndex = String(sequence * carouselFragmentImages.length + index);
       const image = fragmentImage(src, `Fragment ${index + 1}`);
       image.loading = 'eager';
+      image.addEventListener('load', () => {
+        if (image.naturalHeight > image.naturalWidth) item.classList.add('is-portrait');
+      }, { once: true });
       item.append(image);
       track.append(item);
     });

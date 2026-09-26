@@ -970,6 +970,17 @@ body {
   width: 32%;
 }
 
+/* June 2026: present the two related vertical works at one shared size. */
+.fragments-archive__item--june-pair .fragments-archive__button {
+  aspect-ratio: 2 / 3;
+}
+
+.fragments-archive__item--june-pair img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .fragments-archive__pair {
   display: grid;
   grid-column: 1 / -1;
@@ -1491,6 +1502,9 @@ html[lang="zh-CN"] .project-detail__pagination a {
   backface-visibility: hidden;
 }
 
+/* Keep vertical works quieter in the moving sequence, without changing their crop. */
+.fragments-carousel__item.is-portrait img { max-height: 82%; }
+
 .fragments-carousel__item.is-current {
   opacity: 1;
   filter: grayscale(0);
@@ -1505,4 +1519,6 @@ html[lang="zh-CN"] .project-detail__pagination a {
     flex-basis: 7.75rem;
     height: 15rem;
   }
+
+  .fragments-carousel__item.is-portrait img { max-height: 82%; }
 }
