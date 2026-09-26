@@ -157,6 +157,7 @@ body {
   display: grid;
   place-items: center;
   padding: clamp(2rem, 6vw, 7rem);
+  position: relative;
 }
 
 .statement__inner { width: min(100%, 76.67rem); text-align: center; }
@@ -172,6 +173,18 @@ body {
 }
 
 .statement__index { margin-top: clamp(2rem, 6vw, 4.5rem); color: var(--soft-ink); }
+
+.statement__copyright {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(1.5rem, 4vw, 3.25rem);
+  margin: 0;
+  color: var(--soft-ink);
+  font: 400 0.62rem/1.35 var(--sans);
+  letter-spacing: 0.035em;
+  text-align: center;
+  transform: translateX(-50%);
+}
 
 @media (max-width: 620px) {
   .hero__image { object-position: 61% center; }
@@ -223,7 +236,7 @@ body {
 
 .project-detail__subtitle {
   max-width: 48rem;
-  margin: clamp(1.1rem, 2.4vw, 1.8rem) 0 0;
+  margin: clamp(4.7rem, 6vw, 5.4rem) 0 0;
   color: #555552;
   font: 400 clamp(0.72rem, 0.95vw, 0.88rem)/1.52 var(--sans);
   letter-spacing: 0.025em;
@@ -295,24 +308,67 @@ body {
 .project-detail__gallery--row img { aspect-ratio: 16 / 9; height: auto; max-height: none; }
 
 /* Erlkönig: two measured pairs; the first rests on a shared base, the second on its centre line. */
-.project-detail--erlkonig .project-detail__title { font-style: italic; }
-
 .project-detail__gallery--erlkonig {
   display: block;
-  max-width: 78rem;
+  max-width: min(100%, 43.5rem);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .project-detail__gallery--erlkonig .project-detail__composition {
-  margin-bottom: clamp(6rem, 13vw, 13rem);
+  margin-bottom: clamp(0.7rem, 2vw, 1.8rem);
 }
 
-.project-detail__composition--erlkonig-1 { align-items: end; }
-.project-detail__composition--erlkonig-1 img:first-child { grid-column: 1 / 8; }
-.project-detail__composition--erlkonig-1 img:last-child { grid-column: 9 / -1; }
+.project-detail__gallery--erlkonig .project-detail__composition--erlkonig-1 {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: end;
+  margin-bottom: clamp(2.1rem, 6vw, 5.4rem);
+  row-gap: clamp(2.1rem, 6vw, 5.4rem);
+}
+.project-detail__gallery--erlkonig .project-detail__composition--erlkonig-1 img:first-child,
+.project-detail__gallery--erlkonig .project-detail__composition--erlkonig-1 img:last-child { grid-column: auto; }
+.project-detail__gallery--erlkonig .project-detail__composition--erlkonig-1 img { width: 95.238%; }
+.project-detail__gallery--erlkonig .project-detail__composition--erlkonig-1 img:first-child { justify-self: center; }
+.project-detail__gallery--erlkonig .project-detail__composition--erlkonig-1 img:last-child {
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: center;
+  width: 95.238%;
+}
 
-.project-detail__composition--erlkonig-2 { align-items: center; margin-bottom: 0 !important; }
-.project-detail__composition--erlkonig-2 img:first-child { grid-column: 1 / 8; }
-.project-detail__composition--erlkonig-2 img:last-child { grid-column: 9 / -1; }
+.project-detail__gallery--erlkonig .project-detail__composition--erlkonig-2 {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  row-gap: clamp(2.1rem, 6vw, 5.4rem);
+  margin-bottom: 0 !important;
+}
+.project-detail__gallery--erlkonig .project-detail__composition--erlkonig-2 img:first-child,
+.project-detail__gallery--erlkonig .project-detail__composition--erlkonig-2 img:last-child { grid-column: auto; width: 95.238%; }
+.project-detail__gallery--erlkonig .project-detail__composition--erlkonig-2 img:first-child { justify-self: center; }
+.project-detail__gallery--erlkonig .project-detail__composition--erlkonig-2 img:last-child {
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: center;
+}
+
+.project-detail--erlkonig .project-detail__text {
+  font-size: clamp(1.05rem, 1.7vw, 1.7rem);
+  margin-left: auto;
+  margin-right: auto;
+  max-width: min(100%, 52rem);
+}
+
+.project-detail--erlkonig .project-detail__subtitle {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.project-detail--erlkonig .project-detail__meta {
+  margin-left: 0;
+  margin-right: 0;
+  text-align: left;
+}
 
 .project-detail__gallery--calling {
   display: block;
@@ -678,6 +734,8 @@ body {
   .project-detail__gallery { grid-template-columns: 1fr; }
   .project-detail__gallery--row { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.35rem; }
   .project-detail__gallery--erlkonig .project-detail__composition { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .project-detail__gallery--erlkonig .project-detail__composition--erlkonig-1,
+  .project-detail__gallery--erlkonig .project-detail__composition--erlkonig-2 { grid-template-columns: minmax(0, 1fr); }
   .project-detail__gallery--erlkonig .project-detail__composition img,
   .project-detail__composition--erlkonig-1 img:first-child,
   .project-detail__composition--erlkonig-1 img:last-child,
@@ -836,21 +894,16 @@ body {
 .project-list__meta { margin-top: 0.55rem; }
 
 .project-list--gallery .project-list__item--between-tongues { --cover-width: min(64%, 53rem); }
+.project-list--gallery .project-list__item--erlkonig { --cover-width: min(51%, 43.5rem); }
 .project-list--gallery .project-list__item--the-calling { --cover-width: min(45.33%, 38.67rem); }
-.project-list__item--the-calling .project-list__figure,
-.project-list__item--the-calling .project-list__caption { margin-left: auto; }
 
 .project-list--gallery .project-list__item--until-it-all-fades-away { --cover-width: min(74%, 70rem); }
 .project-list--gallery .project-list__figure--diptych { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; }
 
 .project-list--gallery .project-list__item--transit-silence { --cover-width: min(88%, 80rem); }
-.project-list__item--transit-silence .project-list__figure,
-.project-list__item--transit-silence .project-list__caption { margin-left: auto; }
 
 .project-list--gallery .project-list__item--still-forward-looking-back { --cover-width: min(58%, 54rem); }
 .project-list--gallery .project-list__item--to-bloom-in-the-dark { --cover-width: min(45.33%, 38.67rem); }
-.project-list__item--to-bloom-in-the-dark .project-list__figure,
-.project-list__item--to-bloom-in-the-dark .project-list__caption { margin-left: auto; }
 
 .project-list--gallery .project-list__link:hover .project-list__figure img,
 .project-list--gallery .project-list__link:focus-visible .project-list__figure img {
