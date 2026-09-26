@@ -742,6 +742,8 @@ body {
 .projects__eyebrow,
 .projects__count { margin: 0; }
 
+.projects__eyebrow { transform: translateY(2.1rem); }
+
 .project-list { list-style: none; margin: 0 auto; max-width: 90rem; padding: 0; }
 
 .project-list--gallery .project-list__item {
@@ -824,7 +826,7 @@ body {
   .projects { padding-left: 1.5rem; padding-right: 1.5rem; }
   .project-list--gallery .project-list__item { --cover-width: 100%; margin-bottom: clamp(5rem, 20vw, 7rem); }
   .project-list--gallery .project-list__caption { grid-template-columns: 1.65rem minmax(0, 1fr); }
-  .project-list__title { font-size: clamp(2rem, 9.2vw, 3.1rem); }
+  .project-list__title { font-size: clamp(1rem, 4.6vw, 1.55rem); }
 
   .project-detail__gallery--bloom .project-detail__composition { display: grid; margin-bottom: 5rem; }
   .project-detail__gallery--bloom .project-detail__composition img {
