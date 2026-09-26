@@ -221,6 +221,16 @@ body {
   line-height: 0.96;
 }
 
+.project-detail__subtitle {
+  max-width: 48rem;
+  margin: clamp(1.1rem, 2.4vw, 1.8rem) 0 0;
+  color: #555552;
+  font: 400 clamp(0.72rem, 0.95vw, 0.88rem)/1.52 var(--sans);
+  letter-spacing: 0.025em;
+}
+
+.project-detail__subtitle[hidden] { display: none; }
+
 .project-detail__meta { margin: clamp(1.25rem, 3vw, 2.5rem) 0 0; }
 
 .project-detail__watch {
@@ -283,6 +293,26 @@ body {
 .project-detail__gallery img:first-child:last-child { grid-column: 1 / -1; max-width: min(100%, 48rem); }
 .project-detail__gallery--row { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(0.45rem, 1vw, 1rem); }
 .project-detail__gallery--row img { aspect-ratio: 16 / 9; height: auto; max-height: none; }
+
+/* Erlkönig: two measured pairs; the first rests on a shared base, the second on its centre line. */
+.project-detail--erlkonig .project-detail__title { font-style: italic; }
+
+.project-detail__gallery--erlkonig {
+  display: block;
+  max-width: 78rem;
+}
+
+.project-detail__gallery--erlkonig .project-detail__composition {
+  margin-bottom: clamp(6rem, 13vw, 13rem);
+}
+
+.project-detail__composition--erlkonig-1 { align-items: end; }
+.project-detail__composition--erlkonig-1 img:first-child { grid-column: 1 / 8; }
+.project-detail__composition--erlkonig-1 img:last-child { grid-column: 9 / -1; }
+
+.project-detail__composition--erlkonig-2 { align-items: center; margin-bottom: 0 !important; }
+.project-detail__composition--erlkonig-2 img:first-child { grid-column: 1 / 8; }
+.project-detail__composition--erlkonig-2 img:last-child { grid-column: 9 / -1; }
 
 .project-detail__gallery--calling {
   display: block;
@@ -647,6 +677,12 @@ body {
   .project-detail__title { font-size: clamp(1.3rem, 6vw, 2.125rem); }
   .project-detail__gallery { grid-template-columns: 1fr; }
   .project-detail__gallery--row { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.35rem; }
+  .project-detail__gallery--erlkonig .project-detail__composition { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .project-detail__gallery--erlkonig .project-detail__composition img,
+  .project-detail__composition--erlkonig-1 img:first-child,
+  .project-detail__composition--erlkonig-1 img:last-child,
+  .project-detail__composition--erlkonig-2 img:first-child,
+  .project-detail__composition--erlkonig-2 img:last-child { grid-column: auto; }
   .project-detail__gallery--calling { display: block; }
   .project-detail__post-gallery--calling,
   .project-detail__post-gallery--until,

@@ -23,8 +23,31 @@ const projectCatalogue = {
       'assets/projects/gallery/between-tongues/04.jpg'
     ]
   },
+  'erlkonig': {
+    number: '02', title: 'Erlkönig', titleZh: '魔王',
+    meta: { en: 'Photographs, various dimensions, 2025', zh: '摄影，不同尺寸，2025' },
+    subtitle: {
+      en: 'The father rides in the night and wind, with his son in his arms. He grips him tightly, he keeps him warm. The Erl King’s soft call twines with wind and shimmers in the shadows. Only the son hears it, and fear rises with him. When they finally break free from the gloom, is the son dead—or is he entering another mysterious place?',
+      zh: '父亲在夜风中策马，怀里抱着儿子。他紧紧搂住孩子，让他保持温暖。魔王温柔的呼唤与风声交缠，在阴影中微微闪烁。只有儿子听见它，恐惧也随之升起。当他们终于挣脱幽暗，儿子是已经死去，还是正走向另一个神秘之地？'
+    },
+    description: {
+      en: 'Drawing on Schubert’s art song Erlkönig, this photographic series constructs an imagined threshold between the real and the supernatural. Countless points of light hover through the images like an unknown summons. Moving through dim woods and shifting veils of night mist, the work attends to the tension and mystery that permeate the music. As the forest opens from shadowed depths into a widening expanse, the sequence follows the song’s unfolding narrative and gestures towards a passage into another realm.',
+      zh: '本摄影系列取材于舒伯特的艺术歌曲《魔王》，试图构建一个悬置于现实与超自然之间的想象空间。无数光点在图像中浮现，如同未知的召唤；在夜色中微暗的林地与流动的雾幕之间，作品试图捕捉音乐所弥漫的紧张与神秘感。森林由阴影深处逐渐向开阔之处展开，图像也随之推进，呼应叙事的展开，并指向通往另一重领域的转化。'
+    },
+    galleryLayout: 'erlkonig',
+    galleryGroups: [
+      [
+        'assets/projects/gallery/erlkonig/01.jpg',
+        'assets/projects/gallery/erlkonig/02.jpg'
+      ],
+      [
+        'assets/projects/gallery/erlkonig/03.jpg',
+        'assets/projects/gallery/erlkonig/04.jpg'
+      ]
+    ]
+  },
   'the-calling': {
-    number: '02', title: 'The Calling', titleZh: '呼唤',
+    number: '03', title: 'The Calling', titleZh: '呼唤',
     meta: { en: 'Photographs, various dimensions, 2025', zh: '摄影，不同尺寸，2025' },
     description: {
       en: 'During a summer retreat to Jiugong Mountain in Hubei Province, my gaze gradually shifted from the neon lights and constant traffic of the city to enveloping forests and greenery. In the mountains, everything slowed; everything grew quiet.\n\nThrough repeated moments of pausing, gazing, and walking, I sought to capture drifting mist, vast woodland, and intermittent traces of human presence. Rendered in a dark-green tonality, these images blur the boundary between reality and dream.',
@@ -50,7 +73,7 @@ const projectCatalogue = {
     ]
   },
   'until-it-all-fades-away': {
-    number: '03', title: 'Until It All Fades Away', titleZh: '直到一切烟消云散',
+    number: '04', title: 'Until It All Fades Away', titleZh: '直到一切烟消云散',
     meta: { en: "4K synchronous dual-channel video, colour, stereo sound, 10'52'', 2025", zh: '4K 同步双屏影像，彩色，立体声，10分52秒，2025' },
     description: {
       en: 'Before China’s Reform and Opening, national policy prioritized urban development and heavy industry, and university graduates were assigned jobs in designated work units. My father was among the first generation of university students to grow up in this context.\n\nTaking my father’s oral account as a thread, the work unfolds around places where he once lived. I seek to trace his experiences through gestures and language, juxtaposing two repetitive actions—my planting of young trees and his hammering of nails—and layering my voice with his in the narration. The work is an attempt to preserve personal memory while opening a view onto the tension between systemic forces and individual agency.',
@@ -68,7 +91,7 @@ const projectCatalogue = {
     ]
   },
   'transit-silence': {
-    number: '04', title: 'Transit Silence', titleZh: '流动的静默',
+    number: '05', title: 'Transit Silence', titleZh: '流动的静默',
     meta: { en: "4k synchonous dual-channel video, black & white, sound without dialogue, original music by Morton Feldman, 04'36'', 2025", zh: '4K 同步双屏影像，黑白，无对白声音，Morton Feldman 原创音乐，04分36秒，2025' },
     description: {
       en: 'This video work approaches the subway as a space of rupture rather than connection. It draws people away from the world above ground and into an enclosed, temporary state: the sky gives way to low ceilings, and open space is compressed. Bodies are pressed together, yet people remain isolated; the surrounding noise seems to lose its voice, becoming a silent backdrop to one another.\n\nDrawing on stop-motion animation, I juxtapose the lateral movement of bodies with reflections gliding across stainless-steel surfaces. Alternating between emptiness and crowding, the work traces the mechanical rhythms and fractures of modern urban life, along with a sense of bodily and perceptual dislocation. Its circular structure, linking beginning and end, underscores the rupture between underground and surface space.',
@@ -86,7 +109,7 @@ const projectCatalogue = {
     ]
   },
   'still-forward-looking-back': {
-    number: '05', title: 'Still, Forward and Looking Back', titleZh: '静止、前进与回望',
+    number: '06', title: 'Still, Forward and Looking Back', titleZh: '静止、前进与回望',
     meta: { en: "4K video, colour & b/w, stereo sound, 09'46'', 2025", zh: '4K 影像，彩色与黑白，立体声，09分46秒，2025' },
     description: {
       en: 'This short film traces a journey through my hometown, Wuhan, and through the memories that bind me to it. In the late 1950s, the first steel conglomerate built after the founding of New China was established in Wuhan’s Qingshan District. The industrial district created for the steel plant brought many families to the area and gave rise to a well-equipped residential community for its workers. Today, this steel fortress is slowly rusting and falling into disrepair, while the neighborhood where I once lived has disappeared. Yet this absent past continues to shape the reality of my memory.\n\nThe film attends to a past that cannot be recovered. I transform images carrying memory from this period of transition into fragmented montage compositions, blurring and distorting them in unruly combinations to question a destination that can never be fully reached.\n\nThe journey begins in the past and moves towards an uncertain destination—one that may gradually blur and dissolve. It is a process of searching and moving forward, but perhaps also an encounter with an irretrievable past that lingers in the gap between reality and expectation.\n\nThrough this film, I seek to trace this past in order to understand the present, and to connect an intimate history with a broader condition of being. Within grand narratives, we are compelled to open ourselves and move forward, yet we repeatedly return to the subtle textures of individual life.',
@@ -106,7 +129,7 @@ const projectCatalogue = {
     ]
   },
   'to-bloom-in-the-dark': {
-    number: '06', title: 'To Bloom in the Dark', titleZh: '于黑夜绽放',
+    number: '07', title: 'To Bloom in the Dark', titleZh: '于黑夜绽放',
     meta: { en: 'Photographs, various dimensions, 2024', zh: '摄影，不同尺寸，2024' },
     description: {
       en: 'Night is quiet, light, obscure yet like a transparent and pure medium. It is the continuation rather than opposition of light. It is the place of contradiction to illuminate words, dissolving all subject-object oppositions and solidified meanings. For me, night is such an anonymous existence.\n\nThe inspiration of these photos is deposited in such imagination of night. The images show pot plants seen everywhere that are particularly cultivated to decorate the city. However, they exist, but are simply watched, picked or even ignored. Here inn this series, I imagine myself as an adventurous outcomer bumping into this secret garden in the night. Wrapped in the thick darkness, the flowers seem so soft and firm, mysterious and striking; they unfold the life itself by some unspeakable gesture; so dramastic, so unreal, like a dream which may have ended long ago and never come back. It is a momentary gaiety, and will dissipate in the next second.\n\nFrozen in a moment, these images present a heterogeneous space where the obscured and forgotten exist. They are so exposed in the night and so gestured, imprinted on memory.',
@@ -171,6 +194,7 @@ function renderProjectDetail(language = document.documentElement.lang === 'zh-CN
   root.classList.toggle('project-detail--between', project.detailLayout === 'between');
   root.classList.toggle('project-detail--until', project.detailLayout === 'until');
   root.classList.toggle('project-detail--calling', project.detailLayout === 'calling');
+  root.classList.toggle('project-detail--erlkonig', project.galleryLayout === 'erlkonig');
   document.body.classList.toggle('project-detail-page--bloom', project.galleryLayout === 'bloom');
   const displayTitle = language === 'zh' && project.titleZh ? project.titleZh : project.title;
   const index = Object.keys(projectCatalogue).indexOf(work);
@@ -181,6 +205,9 @@ function renderProjectDetail(language = document.documentElement.lang === 'zh-CN
 
   document.getElementById('project-number').textContent = project.number;
   document.getElementById('project-title').textContent = displayTitle;
+  const subtitle = document.getElementById('project-subtitle');
+  subtitle.hidden = !project.subtitle;
+  subtitle.textContent = project.subtitle?.[language] || project.subtitle?.en || '';
   document.getElementById('project-meta').textContent = project.meta[language];
   document.getElementById('project-text').textContent = project.description[language];
   document.title = `${displayTitle} - ${language === 'zh' ? '徐啟笠' : 'Qili Xu'}`;
