@@ -2,6 +2,76 @@ const languageButtons = document.querySelectorAll('[data-language]');
 const translatable = document.querySelectorAll('[data-en][data-zh]');
 const languageStorageKey = 'qili-xu-language';
 
+const becomingCatalogue = {
+  'snow-falling': {
+    number: '01',
+    title: 'Snow Falling',
+    titleZh: '雪落',
+    keywords: [
+      { en: 'covering', zh: '覆盖' },
+      { en: 'erasing', zh: '擦除' },
+      { en: 'occupying', zh: '占据' },
+      { en: 'piling', zh: '堆积' }
+    ],
+    image: 'assets/becoming/snow-falling-cover.jpg',
+    alt: { en: 'Four illuminated window-like images against a black field', zh: '黑色画面中的四幅明暗窗景' }
+  },
+  duality: {
+    number: '02',
+    title: 'Duality',
+    titleZh: '二元性',
+    image: 'assets/becoming/duality.jpg',
+    alt: { en: 'A monochrome forest photograph paired with handwritten text', zh: '一幅黑白树林影像与手写文字并置' }
+  }
+};
+
+function renderBecomingDetail(language = document.documentElement.lang === 'zh-CN' ? 'zh' : 'en') {
+  const root = document.getElementById('becoming-project');
+  if (!root) return;
+
+  const work = new URLSearchParams(window.location.search).get('work') || 'snow-falling';
+  const project = becomingCatalogue[work] || becomingCatalogue['snow-falling'];
+  const title = language === 'zh' ? project.titleZh : project.title;
+  const number = document.getElementById('becoming-project-number');
+  const titleElement = document.getElementById('becoming-project-title');
+  const keywords = document.getElementById('becoming-project-keywords');
+  const image = document.getElementById('becoming-project-image');
+  const projectKeys = Object.keys(becomingCatalogue);
+  const currentIndex = Math.max(projectKeys.indexOf(work), 0);
+  const previous = projectKeys[(currentIndex - 1 + projectKeys.length) % projectKeys.length];
+  const next = projectKeys[(currentIndex + 1) % projectKeys.length];
+  const previousLink = document.getElementById('becoming-project-previous');
+  const nextLink = document.getElementById('becoming-project-next');
+
+  root.classList.toggle('becoming-project--snow-falling', work === 'snow-falling');
+  root.classList.toggle('becoming-project--duality', work === 'duality');
+  number.hidden = false;
+  number.textContent = project.number;
+  titleElement.textContent = title;
+  image.src = project.image;
+  image.alt = project.alt[language];
+  document.title = `${title} - ${language === 'zh' ? '徐啟笠' : 'Qili Xu'}`;
+  previousLink.href = `becoming-project.html?work=${previous}`;
+  nextLink.href = `becoming-project.html?work=${next}`;
+  previousLink.setAttribute('aria-label', language === 'zh' ? '上一个项目' : 'Previous project');
+  nextLink.setAttribute('aria-label', language === 'zh' ? '下一个项目' : 'Next project');
+
+  keywords.replaceChildren();
+  keywords.hidden = !project.keywords;
+  project.keywords?.forEach((keyword, index) => {
+    if (index) {
+      const separator = document.createElement('span');
+      separator.className = 'becoming-project__separator';
+      separator.setAttribute('aria-hidden', 'true');
+      separator.textContent = '/';
+      keywords.append(separator);
+    }
+    const item = document.createElement('span');
+    item.textContent = keyword[language];
+    keywords.append(item);
+  });
+}
+
 const projectCatalogue = {
   'between-tongues': {
     number: '01', title: 'Between Tongues', titleZh: '在语言之间',
@@ -310,6 +380,7 @@ function setLanguage(language, { remember = true } = {}) {
   });
 
   renderProjectDetail(selectedLanguage);
+  renderBecomingDetail(selectedLanguage);
   renderFragments(selectedLanguage);
   scheduleHomeHeroShift();
   scheduleCallingTitleAlignment();
