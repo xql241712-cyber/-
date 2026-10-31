@@ -162,10 +162,10 @@ const projectCatalogue = {
   },
   'transit-silence': {
     number: '05', title: 'Transit Silence', titleZh: '流动的静默',
-    meta: { en: "4k synchonous dual-channel video, black & white, sound without dialogue, original music by Morton Feldman, 04'36'', 2025", zh: '4K 同步双屏影像，黑白，无对白声音，Morton Feldman 原创音乐，04分36秒，2025' },
+    meta: { en: "4k video, black & white, sound without dialogue, 04'36'', 2025", zh: '4K 影像，黑白，无对白声音，04分36秒，2025' },
     description: {
-      en: 'This video work approaches the subway as a space of rupture rather than connection. It draws people away from the world above ground and into an enclosed, temporary state: the sky gives way to low ceilings, and open space is compressed. Bodies are pressed together, yet people remain isolated; the surrounding noise seems to lose its voice, becoming a silent backdrop to one another.\n\nDrawing on stop-motion animation, I juxtapose the lateral movement of bodies with reflections gliding across stainless-steel surfaces. Alternating between emptiness and crowding, the work traces the mechanical rhythms and fractures of modern urban life, along with a sense of bodily and perceptual dislocation. Its circular structure, linking beginning and end, underscores the rupture between underground and surface space.',
-      zh: '这件影像作品将地铁空间视为断裂而非连接。它将人们从地面世界抽离，置入一种封闭而暂时的状态；天空让位于低矮的天花板，开放空间也被压缩。身体彼此紧贴，人群却依然孤立；周围的声音也仿佛成为彼此沉默的背景。\n\n受定格动画启发，我将身体的横向移动与不锈钢表面滑过的反光并置。图像在空无与拥挤之间切换，在开头与结尾之间循环，作品追索现代都市生活中机械性的节奏与断裂，以及身体与感知的失位。'
+      en: 'This moving-image work approaches the subway as a space of disconnection rather than connection. It separates people from the world above ground, placing them in an enclosed and transient state. The sky gives way to low ceilings, while open space becomes compressed. Bodies are pressed close together, yet individuals remain isolated; the surrounding sounds seem to form a backdrop to their mutual silence.\n\nInspired by stop-motion animation, I juxtapose the lateral movement of bodies with reflections on stainless steel surfaces. The imagery shifts between emptiness and congestion, forming a loop between beginning and end. Through this interplay, the work traces the mechanical rhythms and ruptures of modern urban life, as well as the disjunction between the body and perception.',
+      zh: '这件影像作品将地铁空间视为断裂而非连接。它将人们从地面世界抽离，置入一种封闭而暂时的状态；天空让位于低矮的天花板，开放空间也被压缩。身体彼此紧贴，人群却依然孤立；周围的声音也仿佛成为彼此沉默的背景。\n\n受定格动画启发，我将身体的横向移动与不锈钢表面的反光并置。图像在空无与拥挤之间切换，在开头与结尾之间循环，作品追索现代都市生活中机械性的节奏与断裂，以及身体与感知的错位。'
     },
     link: 'https://youtu.be/OFoXaO2rBkc', linkLabel: { en: 'Watch video ↗', zh: '观看影像 ↗' },
     videoPreview: 'https://i.ytimg.com/vi/OFoXaO2rBkc/maxresdefault.jpg',
